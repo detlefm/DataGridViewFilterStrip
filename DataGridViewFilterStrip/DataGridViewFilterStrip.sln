@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGridViewFilterStrip", "DataGridViewFilterStrip\DataGridViewFilterStrip.csproj", "{EE75FF4B-A22D-4F19-B581-30E1C4F8E33D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{5DC971B9-C8D2-47D2-A49E-B3E73545034A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EE75FF4B-A22D-4F19-B581-30E1C4F8E33D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE75FF4B-A22D-4F19-B581-30E1C4F8E33D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE75FF4B-A22D-4F19-B581-30E1C4F8E33D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE75FF4B-A22D-4F19-B581-30E1C4F8E33D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92A34B13-5E8A-40A6-8F8D-5A37CC5964C1}
+	EndGlobalSection
+EndGlobal
