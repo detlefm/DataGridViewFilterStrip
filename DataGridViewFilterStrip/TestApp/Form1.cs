@@ -12,12 +12,13 @@ using System.Windows.Forms;
 
 namespace TestApp {
     public partial class Form1 : Form {
+
         public Form1() {
             InitializeComponent();
         }
 
 
-        FilterStrip<Person> filterStrip;
+        private FilterStrip<Person> filterStrip;
 
 
         private GridFilter<Person> GreaterName() {
