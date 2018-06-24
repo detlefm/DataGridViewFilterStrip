@@ -43,7 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataGridContextMenuHelper.cs" />
-    <Compile Include="DataGridContextMenu_org.cs" />
     <Compile Include="FilterStrip.cs" />
     <Compile Include="ObjectBindingList_Basis.cs" />
     <Compile Include="ObjectBindingList_Part.cs" />

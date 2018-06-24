@@ -1,14 +1,14 @@
-# DataGridViewFilterStrip
+# FilterStrip
 Attachment to a DataGridView to provide a ContextMenuStrip for sorting and filtering a list of business objects.
 
-Out of the box it provides a ContextMenu where the DataGridView can be filtered by the value of the actual cell.
+Together with a DataGridContextMenuHelper it provides a ContextMenu where the DataGridView can be filtered by the value of the actual cell.
 Additional  (user defined) filters can be attached to every DataProperty of the business model.
 
 The filter mechanism is provided by a BindingList implementation which also provide core sorting by clicking on the header of a column.
 
-Known issues:
-Actual it works only for fixed Lists. When an item is added or removed to the underlying list the BindingList implementation is not aware of this changes.
-When sorting not work please check the column properties, the SortMode must be "Automatic". The designer sets by default the SortMode to "NotSortable" when the datatype of the column is Boolean.
+
+When sorting not work please check the column properties, the SortMode must be "Automatic".
+The designer sets by default the SortMode to "NotSortable" when the datatype of the column is Boolean.
 
 ## Usage
 

@@ -2,11 +2,25 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DataGridViewFilterStrip {
+
+
+    public class StripDataEx {
+        public int RowIndex { get; set; }
+        public int ColIndex { get; set; }
+        public string HeaderText { get; set; }
+        public object DataBoundItem { get; set; }
+        public object ItemData { get; set; }
+        public PropertyInfo Getter { get; set; }
+        public DataGridView Grid { get; set; }
+    }
+
+
     public class ToolStripDescription {
         public string GroupName { get; set; }
         // not used 20180623
