@@ -6,9 +6,9 @@ Additional  (user defined) filters can be attached to every DataProperty of the 
 
 The filter mechanism is provided by a BindingList implementation which also provide core sorting by clicking on the header of a column.
 
-Known issues:   
-Actual it works only for fixed Lists. When an item is added or removed to the underlying list the BindingList implementation is not aware of this changes.  
-When sorting not work please check the column properties, the SortMode must be "Automatic". The designer sets by default the SortMode to "NotSortable" when the datatype of the column is Boolean.   
+Known issues:
+Actual it works only for fixed Lists. When an item is added or removed to the underlying list the BindingList implementation is not aware of this changes.
+When sorting not work please check the column properties, the SortMode must be "Automatic". The designer sets by default the SortMode to "NotSortable" when the datatype of the column is Boolean.
 
 ## Usage
 
@@ -18,19 +18,27 @@ The steps (without user defined filters) are:
 
 ```
  private FilterStrip<Person> filterStrip;
- 
+
  // and in the method where you set the DataSource
- 
- filterStrip = new FilterStrip<Person>(dataGridView1);
- ObjectBindingList<Person> bl = new ObjectBindingList<Person>(lstOfPerson);
- personBindingSource.DataSource = bl;
- 
+
+ // init the data
+    List<Person> lst = Person.CreateData();
+    // create a DataGridContextMenuHelper and attach it to the DataGridView
+    // this class provides a context menu for every purpose
+    // in this example we use it only for the filter functionality
+    contextMenuHelper = new DataGridContextMenuHelper(dataGridView1);
+    // create a FilterStrip of Person and register it at the ContextMenuHelper
+    filterStrip = new FilterStrip<Person>(contextMenuHelper);
+    // personBindingSource is already the DataSource of the DataGridView
+    // done by the visual creation of the personBindingSource in the Designer
+    personBindingSource.DataSource = new ObjectBindingList<Person>(lst);
+
  ```
  With user defines filters:
- 
+
 ```
  private FilterStrip<Person> filterStrip;
- 
+
  // create your own filter
  private GridFilter<Person> GreaterName() {
     return new GridFilter<Person> {
@@ -46,16 +54,28 @@ The steps (without user defined filters) are:
          })
     };
  }
- 
+
  // and in the method where you set the DataSource
- 
- filterStrip = new FilterStrip<Person>(dataGridView1);
- // register your filter
- filterStrip.AddFilter("Name", GreaterName());
- // add standard filters (equal) if you wish
- filterStrip.AddStandardFilters();
- ObjectBindingList<Person> bl = new ObjectBindingList<Person>(lstOfPerson);
- personBindingSource.DataSource = bl;
- 
+
+    // init the data
+    List<Person> lst = Person.CreateData();
+    // create a DataGridContextMenuHelper and attach it to the DataGridView
+    // this class provides a context menu for every purpose
+    // in this example we use it only for the filter functionality
+    contextMenuHelper = new DataGridContextMenuHelper(dataGridView1);
+    // create a FilterStrip of Person and register it at the ContextMenuHelper
+    filterStrip = new FilterStrip<Person>(contextMenuHelper);
+    // add a custom filter (optinal)
+    filterStrip.AddFilter("Name", GreaterName());
+
+    // because we add an user defined filter we have to add
+    // the StandardFilter (Equal filter) to every column
+    // if we don't do this the Equal filter is missing on the 'Name' column
+    filterStrip.AddStandardFilters();
+
+    // personBindingSource is already the DataSource of the DataGridView
+    // done by the visual creation of the personBindingSource in the Designer
+    personBindingSource.DataSource = new ObjectBindingList<Person>(lst);
+
  ```
- 
+
