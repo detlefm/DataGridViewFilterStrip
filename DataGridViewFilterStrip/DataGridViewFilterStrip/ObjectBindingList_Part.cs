@@ -16,6 +16,7 @@ namespace DataGridViewFilterStrip {
     }
 
     public interface IObjectFilterView<T> {
+        IEnumerable<T> GetData(bool all);
         void SetFilter(ListFilterDescription<T> listFilterDescription);
         void RemoveFilter();
     }
@@ -29,68 +30,74 @@ namespace DataGridViewFilterStrip {
             public bool Cancel { get; set; } = false;
         }
 
-        public delegate void dFilterCallback (object sender, BindingListFilterEventArgs args);
-
-        public event dFilterCallback FilterCallback = (s, a) => { };
 
        
         string filterString;
-        List<T> originalLst = null;
 
-        public bool SupportsFiltering => true;
+
+        public bool SupportsFiltering => false;
 
         public string Filter {
             get => filterString;
             set => ApplyFilter(value);
         }
 
+     
+
+
         public void RemoveFilter() {
             RaiseListChangedEvents = false;
+            List<T> lst = new List<T>(filteredList);
+            lst.AddRange(base.Items);
+            filteredList.Clear();
             this.ClearItems();
-            foreach (var item in originalLst) {
+            foreach (var item in lst) {
                 this.Add(item);
+            }
+            if (IsSortedCore) {
+                ApplySortCore(this.SortPropertyCore, this.SortDirectionCore);
             }
             RaiseListChangedEvents = true;
             OnListChanged(new ListChangedEventArgs(ListChangedType.Reset, -1));
         }
 
         private void ApplyFilter(string value) {
-            string lastFilter = filterString;
-            filterString = value;
-            // Save the default value
-            if (originalLst == null) {
-                originalLst = new List<T>();
-                originalLst.AddRange(base.Items);
-            }
-            BindingListFilterEventArgs args = new BindingListFilterEventArgs {
-                Cancel = false, FilterString = value, Source = originalLst, Result = new List<T>()
-            };
-            FilterCallback.Invoke(this, args);
-            if (args.Cancel == false) {
-                this.ClearItems();
-                foreach (var item in args.Result) {
-                    this.Add(item);
-                }
-            } 
+            throw new NotImplementedException("ApplyFilter");
         }
 
 
         #region IObjectFilterView
-     
+
+
+
+        List<T> filteredList = new List<T>();
+        public ListFilterDescription<T> CurrentFilter { get; set; }
 
         public void SetFilter(ListFilterDescription<T> listFilterDescription) {
-            string lastFilter = filterString;
-            filterString = "$$CUSTOMCALL$$";
-            if (originalLst == null) {
-                originalLst = new List<T>();
-                originalLst.AddRange(base.Items);
+            if (CurrentFilter != null) {
+                // we are already filtered
+                RemoveFilter();
             }
+            filterString = "$$CUSTOMCALL$$";
+            CurrentFilter = listFilterDescription;
+            List<T> src = new List<T>(base.Items);
+            var result = listFilterDescription.FilterFunc(base.Items, listFilterDescription.PropertyInfo, listFilterDescription.CompareObject).ToList();
+            filteredList = base.Items.Except(result).ToList();
             this.ClearItems();
-            var result = listFilterDescription.FilterFunc(originalLst, listFilterDescription.PropertyInfo, listFilterDescription.CompareObject);
-            foreach (var item in result) {
+            foreach (var item in result) {           
                 this.Add(item);
             }
         }
+
+
+        public IEnumerable<T> GetData(bool all) {
+            List<T> tmp = new List<T>(base.Items);
+            if (all && filteredList != null) {
+                tmp.AddRange(filteredList);
+            }
+            return tmp;
+        }
+
         #endregion
 
 

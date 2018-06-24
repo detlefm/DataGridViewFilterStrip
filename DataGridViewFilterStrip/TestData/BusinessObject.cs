@@ -4,7 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TestApp {
+namespace TestData
+{
     class Data {
         static Random rand = new Random(1);
         static List<KeyValuePair<string, int>> cities = new Dictionary<string, int> {
@@ -14,7 +15,7 @@ namespace TestApp {
             { "Newport", 02840}, {"Camden",  29020}, {"Aberdeen", 57401}
         }.ToList();
 
-        static public KeyValuePair<string,int> GetCity() {
+        static public KeyValuePair<string, int> GetCity() {
             int no = rand.Next(cities.Count);
             return cities[no];
         }
@@ -41,7 +42,7 @@ namespace TestApp {
             while (result.Count < count) {
                 Address adr = new Address(false);
                 // only unique ZipCodes
-                if (result.Where(a => a.ZipCode == adr.ZipCode).FirstOrDefault() == null){
+                if (result.Where(a => a.ZipCode == adr.ZipCode).FirstOrDefault() == null) {
                     result.Add(adr);
                 }
             }
@@ -59,17 +60,17 @@ namespace TestApp {
             }
         }
         public List<Address> Addresses { get; set; } = new List<Address>();
-        //public SortableBindingList<Address> SAddresses {
-        //    get {
-                
-        //        return new SortableBindingList<Address>(Addresses);
-        //    }
-        //}
+
+        public override string ToString() {
+            return Name;
+        }
+
 
         public static List<Person> CreateData() {
             List<Person> lst = new List<Person>();
-            lst.Add(new Person { Name = "John", BirthYear = 1978, IsWoman = false,
-                 Addresses = new List<Address> {
+            lst.Add(new Person {
+                Name = "John", BirthYear = 1978, IsWoman = false,
+                Addresses = new List<Address> {
                      new Address(true), new Address(false), new Address(false)
                  }
             });
@@ -106,6 +107,4 @@ namespace TestApp {
             return lst;
         }
     }
-
-
 }

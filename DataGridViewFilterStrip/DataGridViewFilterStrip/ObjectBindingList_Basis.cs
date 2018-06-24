@@ -1,18 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace DataGridViewFilterStrip {
     public partial class ObjectBindingList<T> : BindingList<T> {
 
-
         public ObjectBindingList() : base() { }
 
-        public ObjectBindingList(IList<T> list) : base(list) { }
+        public ObjectBindingList(IList<T> list) : base(list) {
+        }
 
 
         private bool ísSorted;
@@ -47,7 +49,6 @@ namespace DataGridViewFilterStrip {
             sortCore.SortDirection = ListSortDirection.Ascending;
             ísSorted = false;
         }
-
 
 
         protected override PropertyDescriptor SortPropertyCore => sortCore.PropertyDescriptor; 

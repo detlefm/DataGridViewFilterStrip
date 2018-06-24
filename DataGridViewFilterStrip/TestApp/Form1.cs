@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TestData;
 
 namespace TestApp {
     public partial class Form1 : Form {
@@ -19,6 +21,7 @@ namespace TestApp {
 
 
         private FilterStrip<Person> filterStrip;
+        private DataGridContextMenuHelper contextMenuHelper;
 
 
         private GridFilter<Person> GreaterName() {
@@ -37,14 +40,29 @@ namespace TestApp {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            // bind the FilterStrip to the dataGridView
-            filterStrip = new FilterStrip<Person>(dataGridView1);
-            // if using user defined filters you can add an equal filter to all columns
-            // the equal filter is always present if no user defined filter for a column is defined
-            filterStrip.AddStandardFilters();
-            // add the user defined filter
+
+            // init the data
+            List<Person> lst = Person.CreateData();
+            // create a DataGridContextMenuHelper and attach it to the DataGridView
+            // this class provides a context menu for every purpose
+            // in this example we use it only for the filter functionality
+            contextMenuHelper = new DataGridContextMenuHelper(dataGridView1);
+            // create a FilterStrip of Person and register it at the ContextMenuHelper
+            filterStrip = new FilterStrip<Person>(contextMenuHelper);
+            // add a custom filter (optinal)
             filterStrip.AddFilter("Name", GreaterName());
-            personBindingSource.DataSource = new ObjectBindingList<Person>(Person.CreateData());
+
+            // because we add an user defined filter we have to add 
+            // the StandardFilter (Equal filter) to every column
+            // if we don't do this the Equal filter is missing on the 'Name' column
+            filterStrip.AddStandardFilters();
+
+            // personBindingSource is already the DataSource of the DataGridView
+            // done by the visual creation of the personBindingSource in the Designer
+            personBindingSource.DataSource = new ObjectBindingList<Person>(lst);
         }
+
+       
+        
     }
 }

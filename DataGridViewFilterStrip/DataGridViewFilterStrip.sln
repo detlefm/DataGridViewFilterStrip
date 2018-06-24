@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGridViewFilterStrip", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{5DC971B9-C8D2-47D2-A49E-B3E73545034A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestData", "TestData\TestData.csproj", "{51206E6C-4A91-445F-AD5D-35A7C03B5BED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DC971B9-C8D2-47D2-A49E-B3E73545034A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51206E6C-4A91-445F-AD5D-35A7C03B5BED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51206E6C-4A91-445F-AD5D-35A7C03B5BED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51206E6C-4A91-445F-AD5D-35A7C03B5BED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51206E6C-4A91-445F-AD5D-35A7C03B5BED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

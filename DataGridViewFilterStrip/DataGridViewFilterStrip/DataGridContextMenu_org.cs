@@ -22,14 +22,14 @@ namespace DataGridViewFilterStrip {
         public DataGridView Grid { get; set; }
     }
 
-    public class DataGridContextMenu {
+    public class DataGridContextMenu_org {
         // with the help of
         // https://stackoverflow.com/questions/1718389/right-click-context-menu-for-datagridview/9641704#9641704
 
  
         Func<StripDataEx, ContextMenuStrip> getStrip;
 
-        public DataGridContextMenu(DataGridView grid,Func<StripDataEx, ContextMenuStrip> openStrip) {
+        public DataGridContextMenu_org(DataGridView grid,Func<StripDataEx, ContextMenuStrip> openStrip) {
             grid.CellMouseDown += Grid_CellMouseDown;
             grid.KeyDown += Grid_KeyDown;
             grid.CellContextMenuStripNeeded += Grid_CellContextMenuStripNeeded;
